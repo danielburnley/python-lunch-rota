@@ -1,4 +1,4 @@
-from src.lunch_rota import LunchersGateway
+from src import LunchersGateway
 
 class GetNextBatchSpy:
   def __init__(self):

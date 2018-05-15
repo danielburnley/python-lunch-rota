@@ -1,4 +1,4 @@
-from . import *
+from src import *
 
 def lambda_handler(event, context):
   get_rota = GetRota(TeamMemberGateway(), LunchersGateway(GetNextBatch()))
