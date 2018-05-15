@@ -1,2 +1,5 @@
 venv/
-
+.vscode/
+.pytest_cache/
+*.pyc
+rota.json
