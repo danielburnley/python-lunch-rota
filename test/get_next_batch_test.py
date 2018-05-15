@@ -1,4 +1,4 @@
-from src.lunch_rota import GetNextBatch
+from src import GetNextBatch
 import random
 
 class TestGetNextBatch:
