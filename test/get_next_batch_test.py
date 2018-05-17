@@ -54,7 +54,7 @@ class TestGetNextBatch:
     self.eligible = [7, 8]
     self.count = 4
     self.excluded = [1, 2, 3, 4, 5, 6]
-    self.assert_response([7, 8, 3, 1], [6, 2, 4, 5], [7, 8, 3, 1])
+    self.assert_response([7, 8, 3, 1], [6, 2, 4, 5, 7, 8], [3, 1])
 
   def test_chained_batches(self):
     team_members = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -62,9 +62,12 @@ class TestGetNextBatch:
     lunchers, remaining, excluded = self.use_case.execute(team_members, 3, eligible, [])
     assert lunchers == [3,1,6]
     assert remaining == [2,4,5,8,7]
-    lunchers_two, remaining, excluded = self.use_case.execute(team_members, 3, remaining, excluded)
-    assert lunchers_two == [2, 8, 4]
+    assert excluded == [3,1,6]
+    lunchers, remaining, excluded = self.use_case.execute(team_members, 3, remaining, excluded)
+    assert lunchers == [2, 8, 4]
     assert remaining == [5, 7]
+    assert excluded == [3,1,6,2,8,4]
     lunchers_three, remaining, excluded = self.use_case.execute(team_members, 3, remaining, excluded)
     assert lunchers_three == [5, 7, 3]
-    assert remaining == [6, 8, 1, 4, 2]
+    assert remaining == [6, 8, 1, 4, 2, 5, 7]
+    assert excluded == [3]

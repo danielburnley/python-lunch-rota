@@ -13,8 +13,7 @@ class GetNextBatch:
     remaining_count = count - len(next_batch)
     valid_team_members = [name for name in team_members if name not in next_batch]
     additional_batch, remaining = self.draw_team_members(valid_team_members, remaining_count)
-    next_batch = next_batch + additional_batch
-    return(next_batch, remaining, next_batch)
+    return(next_batch + additional_batch, remaining + next_batch, additional_batch)
 
   def draw_team_members(self, eligible, count):
     eligible.sort()
