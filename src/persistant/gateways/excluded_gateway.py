@@ -8,7 +8,7 @@ class ExcludedGateway:
 
   def current(self):
     obj = self.excluded.get()
-    return obj['Body'].read().decode('utf-8').split(",")
+    return obj['Body'].read().decode('utf-8').strip("\n").split(",")
 
   def update(self, excluded):
     excluded = ",".join(excluded)
