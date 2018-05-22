@@ -10,16 +10,17 @@ class LambdaHandler:
 
   def execute(self, event, context):
     event_body = parse_qs(event['body'])
-    token_string = f"token={os.environ['SLACK_TOKEN']}"
-    command = event_body['text']
+    command = ''
+    if 'text' in event_body:
+      command = event_body['text']
 
-    if token_string in event_body['token']:
+    if os.environ['SLACK_TOKEN'] in event_body['token']:
       status_code = 200
       lunchers = []
       if 'next' in command:
-        lunchers = get_next_rota.execute()['rota']
+        lunchers = self.get_next_rota.execute()['rota']
       else:
-        lunchers = get_rota.execute()['rota']
+        lunchers = self.get_rota.execute()['rota']
       response_body = self.format_slack_message(lunchers)
     else:
       response_body = json.dumps({})
