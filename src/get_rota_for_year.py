@@ -1,4 +1,4 @@
-class GetRota:
+class GetRotaForYear:
   def __init__(self, team_members_gateway, lunchers_gateway):
     self.team_member_gateway = team_members_gateway
     self.lunchers_gateway = lunchers_gateway
