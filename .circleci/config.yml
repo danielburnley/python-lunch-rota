@@ -12,23 +12,19 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "requirements.txt" }}
+          - v1-dependencies-{{ checksum "Pipfile.lock" }}
           - v1-dependencies-
       - run:
           name: install dependencies
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
+          command: pipenv sync --dev
       - save_cache:
           paths:
-            - ./venv
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
+            - ~/.local
+            - ~/.cache
+          key: v1-dependencies-{{ checksum "Pipfile.lock" }}
       - run:
           name: run tests
-          command: |
-            . venv/bin/activate
-            make test
+          command: pipenv run make test
   deploy:
     machine:
       enabled: true
