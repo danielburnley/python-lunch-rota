@@ -4,9 +4,10 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pytest = "==3.5.1"
 
 [dev-packages]
+awscli = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.5"
