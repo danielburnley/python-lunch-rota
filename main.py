@@ -1,6 +1,6 @@
-from src import LambdaHandler
-from src.persistant import *
-from src.persistant.gateways import *
+from src.persistant import GetCurrentRota, GetNextBatch, GetNextRota, LambdaHandler
+from src.persistant.gateways import ExcludedGateway, LunchersGateway, TeamMembersGateway
+
 
 def lambda_handler(event, context):
   get_rota = GetCurrentRota(LunchersGateway())
